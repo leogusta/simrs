@@ -1,4 +1,3 @@
-import { ModeToggle } from "@/shadcn/ui/mode-toggle";
 import { Head } from "@inertiajs/react";
 import { PropsWithChildren } from "react";
 
