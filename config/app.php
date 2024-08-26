@@ -123,4 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'custom_error_page' => env('CUSTOM_ERROR_PAGES', false),
+
 ];

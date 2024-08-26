@@ -3,6 +3,9 @@ import { Button } from "@/shadcn/ui/button";
 import { Input } from "@/shadcn/ui/input";
 import { Label } from "@/shadcn/ui/label";
 import { Checkbox } from "@/shadcn/ui/checkbox";
+import { Alert, AlertDescription, AlertTitle } from "@/shadcn/ui/alert";
+
+import { RocketIcon } from "@radix-ui/react-icons";
 
 import GuestLayout from "@/Layouts/GuestLayout";
 import { FormEventHandler } from "react";
@@ -17,7 +20,7 @@ export default function Login({
     canResetPassword: boolean;
 }) {
     const { data, setData, post, processing, errors, reset } = useForm({
-        email: "",
+        input_type: "",
         password: "",
         remember: false,
     });
@@ -35,9 +38,12 @@ export default function Login({
             <Head title="Login Page" />
 
             {status && (
-                <div className="mb-4 font-medium text-sm text-green-600">
-                    {status}
-                </div>
+                <>
+                    <Alert variant="destructive" className="max-w-72">
+                        <RocketIcon />
+                        <AlertDescription>{status}</AlertDescription>
+                    </Alert>
+                </>
             )}
 
             <div className="grid gap-6">
@@ -51,28 +57,35 @@ export default function Login({
                 <form onSubmit={submit}>
                     <div className="grid gap-2">
                         <div className="grid w-full max-w-sm items-center gap-1.5">
-                            <Label htmlFor="username">username</Label>
+                            <Label htmlFor="input_type">Username</Label>
                             <Input
-                                id="email"
-                                type="email"
-                                name="email"
-                                value={data.email}
-                                autoComplete="username"
+                                id="input_type"
+                                type="text"
+                                name="input_type"
+                                value={data.input_type}
+                                autoComplete="input_type"
                                 placeholder="username"
                                 onChange={(e) =>
-                                    setData("email", e.target.value)
+                                    setData("input_type", e.target.value)
                                 }
                                 autoFocus
                             />
 
                             <InputError
+                                /* @ts-ignore */
+                                message={errors.username}
+                                className="mt-2"
+                            />
+                            
+                            <InputError
+                                /* @ts-ignore */
                                 message={errors.email}
                                 className="mt-2"
                             />
                         </div>
 
                         <div className="grid w-full max-w-sm items-center gap-1.5">
-                            <Label htmlFor="password">password</Label>
+                            <Label htmlFor="password">Password</Label>
                             <Input
                                 id="password"
                                 type="password"
